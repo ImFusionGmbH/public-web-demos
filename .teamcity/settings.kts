@@ -3,7 +3,6 @@ import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.sshAgent
 import jetbrains.buildServer.configs.kotlin.buildSteps.exec
-import jetbrains.buildServer.configs.kotlin.buildSteps.nodeJS
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 version = "2026.1"
@@ -41,14 +40,19 @@ object TypecheckMirrorToGithub : BuildType({
     }
 
     steps {
-        nodeJS {
-            name = "Typecheck"
-            id = "typecheck"
-            shellScript =
-                """
-                npm ci
-                npm run typecheck
-                """.trimIndent()
+        exec {
+            name = "Install NPM dependencies"
+            id = "install_npm_dependencies"
+            path = "npm"
+            arguments = "ci"
+            dockerImage = "docker.io/library/node:24-bookworm"
+        }
+
+        exec {
+            name = "Typecheck demos"
+            id = "typecheck_demos"
+            path = "npm"
+            arguments = "run typecheck"
             dockerImage = "docker.io/library/node:24-bookworm"
         }
 

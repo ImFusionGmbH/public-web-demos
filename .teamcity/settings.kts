@@ -32,6 +32,11 @@ object TypecheckMirrorToGithub : BuildType({
             "env.GIT_SSH_COMMAND",
             "ssh -o UserKnownHostsFile=%teamcity.build.checkoutDir%/.teamcity/github_known_hosts -o StrictHostKeyChecking=yes",
         )
+        text(
+            "env.NPM_CONFIG_CACHE",
+            "%teamcity.agent.home.dir%/cache/%teamcity.build.default.checkoutDir%/npm",
+            readOnly = true,
+        )
     }
 
     vcs {
@@ -46,6 +51,7 @@ object TypecheckMirrorToGithub : BuildType({
             path = "npm"
             arguments = "ci"
             dockerImage = "docker.io/library/node:24-bookworm"
+            dockerRunParameters = "--volume %teamcity.agent.home.dir%/cache:%teamcity.agent.home.dir%/cache"
         }
 
         exec {
@@ -54,6 +60,7 @@ object TypecheckMirrorToGithub : BuildType({
             path = "npm"
             arguments = "run typecheck"
             dockerImage = "docker.io/library/node:24-bookworm"
+            dockerRunParameters = "--volume %teamcity.agent.home.dir%/cache:%teamcity.agent.home.dir%/cache"
         }
 
         exec {

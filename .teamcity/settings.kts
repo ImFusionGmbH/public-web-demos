@@ -5,7 +5,7 @@ import jetbrains.buildServer.configs.kotlin.buildFeatures.sshAgent
 import jetbrains.buildServer.configs.kotlin.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
-version = "2026.1"
+version = "2026.2"
 
 object Config {
     const val GITHUB_URL = "git@github.com:ImFusionGmbH/test-mirror.git"

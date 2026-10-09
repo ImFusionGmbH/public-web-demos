@@ -9,6 +9,7 @@ version = "2026.1"
 
 object Config {
     const val GITHUB_URL = "git@github.com:ImFusionGmbH/test-mirror.git"
+    const val NODE_IMAGE = "docker.io/library/node:24-bookworm"
 }
 
 project {
@@ -58,7 +59,7 @@ object TypecheckMirrorToGithub : BuildType({
             id = "install_npm_dependencies"
             path = "npm"
             arguments = "ci"
-            dockerImage = "docker.io/library/node:24-bookworm"
+            dockerImage = Config.NODE_IMAGE
             dockerRunParameters = "--volume %teamcity.agent.home.dir%/cache:%teamcity.agent.home.dir%/cache"
         }
 
@@ -67,7 +68,7 @@ object TypecheckMirrorToGithub : BuildType({
             id = "typecheck_demos"
             path = "npm"
             arguments = "run typecheck"
-            dockerImage = "docker.io/library/node:24-bookworm"
+            dockerImage = Config.NODE_IMAGE
             dockerRunParameters = "--volume %teamcity.agent.home.dir%/cache:%teamcity.agent.home.dir%/cache"
         }
 

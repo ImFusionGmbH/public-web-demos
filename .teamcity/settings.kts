@@ -28,9 +28,10 @@ object TypecheckMirrorToGithub : BuildType({
     }
 
     params {
-        param(
+        text(
             "env.GIT_SSH_COMMAND",
             "ssh -o UserKnownHostsFile=%teamcity.build.checkoutDir%/.teamcity/github_known_hosts -o StrictHostKeyChecking=yes",
+            readOnly = true,
         )
         text(
             "env.NPM_CONFIG_CACHE",

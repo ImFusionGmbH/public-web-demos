@@ -21,6 +21,13 @@ object TypecheckMirrorToGithub : BuildType({
     name = "Typecheck/Mirror To Github"
     description = "Type-checks the demos with tsc and mirrors changes to the default branch to Github."
 
+    maxRunningBuildsPerBranch =
+        """
+        <default>:0
+        *:1
+        """.trimIndent()
+    runningBuildsLimitingMode = BuildsLimitingMode.CANCEL_OLDEST_RUNNING_BUILD
+
     features {
         sshAgent { teamcitySshKey = "GithubDeployKey" }
         commitStatusPublisher { publisher = bitbucketServer { authType = vcsRoot() } }

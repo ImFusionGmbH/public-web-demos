@@ -13,14 +13,14 @@ object Config {
 }
 
 project {
-    description = "Type-checks every branch and mirrors the default branch, including Git LFS objects, to the public GitHub repository"
+    description = TypecheckMirrorToGithub.description
 
     buildType(TypecheckMirrorToGithub)
 }
 
 object TypecheckMirrorToGithub : BuildType({
-    name = "Typecheck/Mirror To Github"
-    description = "Type-checks the demos with tsc and mirrors changes to the default branch to Github."
+    name = "Typecheck/Mirror to GitHub"
+    description = "Type-checks the demos and mirrors the repository, including Git LFS objects, to the public GitHub repository"
 
     maxRunningBuildsPerBranch =
         """

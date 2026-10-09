@@ -30,7 +30,7 @@ object TypecheckMirrorToGithub : BuildType({
     runningBuildsLimitingMode = BuildsLimitingMode.CANCEL_OLDEST_RUNNING_BUILD
 
     features {
-        sshAgent { teamcitySshKey = "GithubDeployKey" }
+        sshAgent { teamcitySshKey = "public-demos" }
         commitStatusPublisher { publisher = bitbucketServer { authType = vcsRoot() } }
         pullRequests { provider = bitbucketServer { authType = vcsRoot() } }
     }

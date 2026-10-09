@@ -1,0 +1,23 @@
+{
+  "name": "public-web-demos",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@imfusion/sdk": "latest",
+    "@imfusion/sdk-react": "latest",
+    "@imfusion/web-ui": "latest",
+    "@babylonjs/core": "^8.0.0",
+    "react": "^19.0.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/three": "^0.180.0",
+    "typescript": "^5.9.0",
+    "prettier": "3.9.9"
+  }
+}

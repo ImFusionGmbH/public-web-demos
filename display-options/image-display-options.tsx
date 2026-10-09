@@ -22,8 +22,7 @@ export default function DisplayOptionsPanel() {
         imf.showAll(data);
         setSis(imf.dataModel.getImage());
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   }, [imf, loadFileFromUrl]);
 
   if (error) return <p style={{ fontSize: 14 }}>Failed to load the sample volume: {error.message}</p>;

@@ -1,0 +1,3 @@
+# https://prettier.io/docs/options
+singleQuote: true # all strings are surrounded by ' instead of "
+printWidth: 120

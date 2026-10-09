@@ -1,0 +1,46 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-illegal-windows-names
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-xml
+      - id: check-yaml
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.21.0
+    hooks:
+      - id: yamlfmt
+  - repo: local
+    hooks:
+      - id: ktlint-format
+        name: ktlint format
+        language: system
+        entry: mvn -f .teamcity/pom.xml ktlint:format
+        files: ^\.teamcity/.*\.kts?$
+        pass_filenames: false
+      - id: ktlint-check
+        name: ktlint check
+        language: system
+        entry: mvn -f .teamcity/pom.xml ktlint:check
+        files: ^\.teamcity/.*\.kts?$
+        pass_filenames: false
+      - id: teamcity-configs-generate
+        name: TeamCity configs generate
+        language: system
+        entry: mvn -f .teamcity/pom.xml teamcity-configs:generate
+        files: ^\.teamcity/
+        pass_filenames: false

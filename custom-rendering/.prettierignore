@@ -1,0 +1,13 @@
+*.md
+node_modules
+packages/*/node_modules
+packages/*/.vite/
+packages/*/bin
+packages/*/wasm
+packages/*/dist
+packages/*/coverage
+packages/*/.next
+packages/*/out
+packages/*/.source
+next-env.d.ts
+.clang-format

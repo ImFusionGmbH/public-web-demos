@@ -15,17 +15,24 @@ object Config {
 project {
     description = "Type-checks every branch and mirrors the default branch, including Git LFS objects, to the public GitHub repository"
 
-    buildType(Typecheck)
-    buildType(MirrorToGitHub)
+    buildType(TypecheckMirrorToGithub)
 }
 
-object Typecheck : BuildType({
-    name = "Typecheck"
-    description = "Type-checks the demos with tsc"
+object TypecheckMirrorToGithub : BuildType({
+    name = "Typecheck/Mirror To Github"
+    description = "Type-checks the demos with tsc and mirrors changes to the default branch to Github."
 
     features {
+        sshAgent { teamcitySshKey = "GithubDeployKey" }
         commitStatusPublisher { publisher = bitbucketServer { authType = vcsRoot() } }
         pullRequests { provider = bitbucketServer { authType = vcsRoot() } }
+    }
+
+    params {
+        param(
+            "env.GIT_SSH_COMMAND",
+            "ssh -o UserKnownHostsFile=%teamcity.build.checkoutDir%/.teamcity/github_known_hosts -o StrictHostKeyChecking=yes",
+        )
     }
 
     vcs {
@@ -44,42 +51,13 @@ object Typecheck : BuildType({
                 """.trimIndent()
             dockerImage = "docker.io/library/node:24-bookworm"
         }
-    }
 
-    triggers {
-        vcs {
-            branchFilter = "+:*"
-        }
-    }
-})
-
-object MirrorToGitHub : BuildType({
-    name = "Mirror to GitHub"
-    description = "Mirrors the default branch, including Git LFS objects, to the public GitHub repository"
-
-    features {
-        sshAgent {
-            teamcitySshKey = "GithubDeployKey"
-        }
-    }
-
-    params {
-        param(
-            "env.GIT_SSH_COMMAND",
-            "ssh -o UserKnownHostsFile=%teamcity.build.checkoutDir%/.teamcity/github_known_hosts -o StrictHostKeyChecking=yes",
-        )
-    }
-
-    vcs {
-        root(DslContext.settingsRoot)
-        cleanCheckout = true
-        branchFilter = "+:<default>"
-    }
-
-    steps {
         exec {
             name = "Push LFS objects to GitHub"
             id = "push_lfs_objects_to_github"
+            conditions {
+                equals("teamcity.build.branch.is_default", "true")
+            }
 
             path = "git"
             arguments =
@@ -89,9 +67,13 @@ object MirrorToGitHub : BuildType({
                 %build.vcs.number.${DslContext.settingsRoot.id}%
                 """.trimIndent()
         }
+
         exec {
             name = "Push branch to GitHub"
             id = "push_branch_to_github"
+            conditions {
+                equals("teamcity.build.branch.is_default", "true")
+            }
 
             path = "git"
             arguments =
@@ -104,15 +86,7 @@ object MirrorToGitHub : BuildType({
     }
 
     triggers {
-        vcs {
-            branchFilter = "+:<default>"
-        }
-    }
-
-    dependencies {
-        snapshot(Typecheck) {
-            onDependencyFailure = FailureAction.FAIL_TO_START
-        }
+        vcs { branchFilter = "+:*" }
     }
 
     requirements {

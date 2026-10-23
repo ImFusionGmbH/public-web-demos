@@ -8,7 +8,7 @@ import jetbrains.buildServer.configs.kotlin.triggers.vcs
 version = "2026.2"
 
 object Config {
-    const val GITHUB_URL = "git@github.com:ImFusionGmbH/test-mirror.git"
+    const val GITHUB_URL = "git@github.com:ImFusionGmbH/public-web-demos.git"
     const val NODE_IMAGE = "docker.io/library/node:24-bookworm"
 }
 

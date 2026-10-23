@@ -1,6 +1,6 @@
 # CI
 
-CI type-checks this Bitbucket repository and mirrors it, including Git LFS objects, to the public GitHub repository [ImFusionGmbH/test-mirror](https://github.com/ImFusionGmbH/test-mirror).
+CI type-checks this Bitbucket repository and mirrors it, including Git LFS objects, to the public GitHub repository [ImFusionGmbH/test-mirror](https://github.com/ImFusionGmbH/public-web-demos).
 Nothing is built, tested, or published elsewhere.
 
 | Build configuration         | Purpose                                                                                                      |

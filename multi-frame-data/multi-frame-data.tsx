@@ -18,8 +18,8 @@ export default function FrameSliderWidget() {
       loadFileFromUrl(new URL('../example_data/Ultrasound/img.imf', import.meta.url).href), // multi-frame
       loadFileFromUrl(new URL('../example_data/CT/img.imf', import.meta.url).href), // single-frame
     ])
-      .then(() => {
-        imf.showAll(imf.dataModel.getImages());
+      .then(([ultrasound, ct]) => {
+        imf.showAll([...ct, ...ultrasound]);
         setLoading(false);
       })
       .catch(() => {});

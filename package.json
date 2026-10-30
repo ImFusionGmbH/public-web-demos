@@ -10,7 +10,8 @@
     "@babylonjs/core": "^8.0.0",
     "@imfusion/sdk": "latest",
     "@imfusion/sdk-react": "latest",
-    "@imfusion/web-ui": "^0.8.1-dev.20.g50b02289",
+    "@imfusion/web-ui": "^0.11.1-dev.83.g3251cc92",
+    "@tanstack/react-hotkeys": "0.13.0",
     "react": "^19.0.0",
     "three": "^0.180.0"
   },

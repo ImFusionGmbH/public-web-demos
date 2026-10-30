@@ -7,6 +7,31 @@ import { ImageDisplayOptions } from '@imfusion/web-ui/integrations/image-display
 import { ViewTools } from '@imfusion/web-ui/integrations/view-tools';
 import { LayoutMode } from '@imfusion/web-ui/integrations/layout-mode';
 
+function ViewControlPopover({
+  iconGlyph,
+  label,
+  children,
+}: {
+  iconGlyph: IconComponent;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <Popover.Root>
+      <Popover.Trigger nativeButton={false}>
+        <IconButton glyph={iconGlyph} label={label} variant="ghost" />
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Positioner side="bottom" align="start">
+          <Popover.Popup style={{ maxWidth: 'unset' }} variant="ghost">
+            {children}
+          </Popover.Popup>
+        </Popover.Positioner>
+      </Popover.Portal>
+    </Popover.Root>
+  );
+}
+
 function ViewControlsToolbar() {
   const imf = useImFusion();
 
@@ -27,33 +52,8 @@ function ViewControlsToolbar() {
       imf.display.sliceIndicator().visible = sliceIndicatorVisible;
       imf.display.render();
     },
-    [sliceIndicatorVisible],
+    [imf.display, sliceIndicatorVisible],
   );
-
-  function ViewControlPopover({
-    iconGlyph,
-    label,
-    children,
-  }: {
-    iconGlyph: IconComponent;
-    label: string;
-    children: ReactNode;
-  }) {
-    return (
-      <Popover.Root>
-        <Popover.Trigger nativeButton={false}>
-          <IconButton glyph={iconGlyph} label={label} variant="ghost" />
-        </Popover.Trigger>
-        <Popover.Portal>
-          <Popover.Positioner side="bottom" align="start">
-            <Popover.Popup style={{ maxWidth: 'unset' }} variant="ghost">
-              {children}
-            </Popover.Popup>
-          </Popover.Positioner>
-        </Popover.Portal>
-      </Popover.Root>
-    );
-  }
 
   return (
     <Row align="center">

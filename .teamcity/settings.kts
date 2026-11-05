@@ -73,6 +73,15 @@ object TypecheckMirrorToGithub : BuildType({
         }
 
         exec {
+            name = "Lint demos"
+            id = "lint_demos"
+            path = "npm"
+            arguments = "run lint"
+            dockerImage = Config.NODE_IMAGE
+            dockerRunParameters = "--volume %teamcity.agent.home.dir%/cache:%teamcity.agent.home.dir%/cache"
+        }
+
+        exec {
             name = "Push LFS objects to GitHub"
             id = "push_lfs_objects_to_github"
             conditions {

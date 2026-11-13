@@ -28,5 +28,5 @@ export default function DisplayOptionsPanel() {
   if (error) return <p style={{ fontSize: 14 }}>Failed to load the sample volume: {error.message}</p>;
   if (!sis) return <p style={{ fontSize: 14 }}>Loading data…</p>;
 
-  return <ImageDisplayOptions data={sis} variant="horizontal" />;
+  return <ImageDisplayOptions data={sis} />;
 }

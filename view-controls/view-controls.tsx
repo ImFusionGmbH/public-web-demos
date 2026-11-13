@@ -67,7 +67,7 @@ function ViewControlsToolbar() {
         <LayoutMode></LayoutMode>
       </ViewControlPopover>
       <ViewControlPopover iconGlyph={Brightness} label="DisplayOptions">
-        {selectedImage && <ImageDisplayOptions variant="horizontal" data={selectedImage}></ImageDisplayOptions>}
+        {selectedImage && <ImageDisplayOptions data={selectedImage} />}
       </ViewControlPopover>
     </Row>
   );

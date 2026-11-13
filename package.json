@@ -11,7 +11,7 @@
     "@babylonjs/core": "^8.0.0",
     "@imfusion/sdk": "1.3.2-dev.2.gfc2c082c",
     "@imfusion/sdk-react": "1.3.2-dev.2.gfc2c082c",
-    "@imfusion/web-ui": "0.11.1-dev.124.g73b378f9",
+    "@imfusion/web-ui": "0.11.1-dev.127.gf792d0b3",
     "@tanstack/react-hotkeys": "0.13.0",
     "react": "^19.0.0",
     "three": "^0.180.0"

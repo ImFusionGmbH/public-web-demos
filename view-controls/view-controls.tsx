@@ -59,15 +59,15 @@ function ViewControlsToolbar() {
     <Row align="center">
       <ViewTools></ViewTools>
       <Separator orientation="vertical"></Separator>
-      <Toggle onPressedChange={(pressed) => setSliceIndicatorVisible(pressed)} pressed={sliceIndicatorVisible}>
+      <Toggle.Item onPressedChange={(pressed) => setSliceIndicatorVisible(pressed)} pressed={sliceIndicatorVisible}>
         <Icon glyph={ToolCrosshairChecked}></Icon>
-      </Toggle>
+      </Toggle.Item>
       <Separator orientation="vertical"></Separator>
       <ViewControlPopover iconGlyph={ToolLayout} label="Layout">
         <LayoutMode></LayoutMode>
       </ViewControlPopover>
       <ViewControlPopover iconGlyph={Brightness} label="DisplayOptions">
-        {selectedImage && <ImageDisplayOptions data={selectedImage} />}
+        {selectedImage && <ImageDisplayOptions variant="narrow" data={selectedImage} />}
       </ViewControlPopover>
     </Row>
   );
